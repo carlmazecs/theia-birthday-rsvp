@@ -21,6 +21,29 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
 }
+.intro { position: fixed; inset: 0; z-index: 20; display: grid; place-items: center; overflow: hidden; padding: 24px; background: radial-gradient(ellipse at 50% 100%,#c9e8b6 0 17%,transparent 17.5%),linear-gradient(180deg,#c9e7ff 0%,#f4e2fa 62%,#ffe8c7 100%); transition: opacity .65s ease, visibility .65s ease; }
+.intro.is-opening { opacity: 0; visibility: hidden; pointer-events: none; }
+.intro-copy { position: relative; z-index: 2; margin: 0 0 24px; color: #563c69; text-align: center; font-size: clamp(26px,6vw,42px); }
+.intro-invitation { display: grid; justify-items: center; gap: 17px; text-align: center; }
+.envelope-button { display: grid; justify-items: center; gap: 22px; flex: none; width: min(340px,82vw); padding: 16px 20px 22px; color: #563c69; background: transparent; font: inherit; }
+.envelope-button:focus-visible { outline: 3px solid #df669b; outline-offset: 8px; border-radius: 14px; }
+.envelope { position: relative; display: block; width: min(280px,72vw); height: 178px; perspective: 800px; }
+.envelope-back,.envelope-front,.envelope-flap,.envelope-letter { position: absolute; left: 0; width: 100%; }
+.envelope-back { bottom: 0; height: 145px; border-radius: 12px; background: #f5b9d4; box-shadow: 0 18px 38px #60447635; }
+.envelope-letter { z-index: 1; bottom: 14px; left: 10%; width: 80%; height: 120px; display: grid; place-items: center; border-radius: 8px; color: #81517e; background: #fffdfb; font-family: Georgia,serif; font-size: 24px; transition: transform .75s ease; }
+.envelope-front { z-index: 3; bottom: 0; height: 145px; background: linear-gradient(145deg,#f9d8e7 49%,#efb4d0 50%); clip-path: polygon(0 0,50% 58%,100% 0,100% 100%,0 100%); border-radius: 0 0 12px 12px; }
+.envelope-flap { z-index: 4; top: 33px; height: 114px; transform-origin: top center; transform: rotateX(0); background: #f4c5dc; clip-path: polygon(0 0,100% 0,50% 100%); transition: transform .65s ease; backface-visibility: hidden; }
+.envelope-seal { position: absolute; z-index: 5; left: 50%; top: 112px; transform: translateX(-50%); font-size: 28px; transition: opacity .3s ease; }
+.intro.is-open .envelope-flap { transform: rotateX(180deg); }
+.intro.is-open .envelope-letter { transform: translateY(-78px); }
+.intro.is-open .envelope-seal { opacity: 0; }
+.open-prompt { margin: 0; font: 600 15px/1.5 Arial,sans-serif; letter-spacing: 1px; }
+.intro-butterfly { position: absolute; z-index: 1; pointer-events: none; font-size: 28px; will-change: transform; animation: intro-flight 7s ease-in-out infinite; }
+.intro-butterfly.one { left: -8vw; top: 22%; animation-delay: -1s; }
+.intro-butterfly.two { left: -12vw; top: 67%; font-size: 23px; animation-delay: -4s; }
+.intro-butterfly.three { left: -10vw; top: 45%; font-size: 32px; animation-delay: -6s; }
+@keyframes intro-flight { 0% { transform: translate3d(-5vw,0,0) rotate(-12deg); } 50% { transform: translate3d(60vw,-24px,0) rotate(14deg); } 100% { transform: translate3d(115vw,15px,0) rotate(-8deg); } }
+@media (prefers-reduced-motion: reduce) { .intro,.envelope-letter,.envelope-flap,.envelope-seal { transition-duration: .15s; } .intro-butterfly { animation-duration: 18s; } }
 .butterfly {
   position: fixed;
   top: 0;
@@ -152,6 +175,18 @@ footer { text-align: center; padding: 0 15px 25px; font-size: 13px; }
 </style>
 </head>
 <body>
+<div class="intro" id="intro" role="dialog" aria-modal="true" aria-labelledby="introTitle">
+  <span class="intro-butterfly one" aria-hidden="true">🦋</span>
+  <span class="intro-butterfly two" aria-hidden="true">🦋</span>
+  <span class="intro-butterfly three" aria-hidden="true">🦋</span>
+  <div class="intro-invitation">
+    <h1 class="intro-copy" id="introTitle">A special invitation for you</h1>
+    <button class="envelope-button" id="openInvitation" type="button" aria-label="Open Theia's birthday invitation">
+      <span class="envelope" aria-hidden="true"><span class="envelope-back"></span><span class="envelope-letter">You're invited! ✨</span><span class="envelope-front"></span><span class="envelope-flap"></span><span class="envelope-seal">💌</span></span>
+      <span class="open-prompt">TAP TO OPEN THE INVITATION</span>
+    </button>
+  </div>
+</div>
 <div class="butterfly" aria-hidden="true">🦋</div>
 <div class="butterfly" aria-hidden="true">🦋</div>
 <div class="butterfly" aria-hidden="true">🦋</div>
@@ -187,6 +222,12 @@ footer { text-align: center; padding: 0 15px 25px; font-size: 13px; }
 </main>
 <footer>Made with love for Theia's special day 🦋</footer>
 <script>
+const intro = document.getElementById('intro');
+document.getElementById('openInvitation').addEventListener('click', () => {
+  intro.classList.add('is-open');
+  window.setTimeout(() => intro.classList.add('is-opening'), 750);
+  window.setTimeout(() => intro.remove(), 1450);
+});
 const form = document.getElementById('rsvpForm');
 const message = document.getElementById('message');
 let answer = 'yes';
