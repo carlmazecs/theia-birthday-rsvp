@@ -1,23 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Theia's 1st Birthday</title>
+<style>
+:root {
+  --pink: #f9dce9;
+  --rose: #df669b;
+  --purple: #e9ddff;
+  --gold: #d7ae59;
+  --ink: #563c69;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  color: var(--ink);
+  background: linear-gradient(135deg,#fff6fb,#f0e8ff,#fff7e9);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
 .butterfly {
   position: fixed;
-  top: -50px;
+  top: 0;
+  left: 0;
   z-index: 5;
   pointer-events: none;
   font-size: 25px;
-  animation: fly 12s linear infinite;
+  line-height: 1;
+  will-change: transform;
+  animation: fly-across 14s linear infinite;
 }
-
-@keyframes fly {
-  0% {
-    transform: translate(0, -5vh) rotate(0);
-    left: 8%;
-  }
-  50% {
-    transform: translate(-45px, 55vh) rotate(-20deg);
-    left: 65%;
-  }
-  100% {
-    transform: translate(-30px, 110vh) rotate(0);
-    left: 15%;
-  }
+.butterfly:nth-of-type(2) { animation-delay: -5s; font-size: 20px; }
+.butterfly:nth-of-type(3) { animation-delay: -10s; font-size: 30px; }
+@keyframes fly-across {
+  0% { transform: translate3d(8vw,-12vh,0) rotate(0); }
+  25% { transform: translate3d(30vw,20vh,0) rotate(20deg); }
+  50% { transform: translate3d(62vw,48vh,0) rotate(-20deg); }
+  75% { transform: translate3d(82vw,78vh,0) rotate(15deg); }
+  100% { transform: translate3d(14vw,112vh,0) rotate(0); }
 }
+header {
+  text-align: center;
+  padding: 28px 15px 12px;
+  letter-spacing: 2px;
+  font-size: 13px;
+  font-weight: bold;
+}
+main {
+  width: min(960px, calc(100% - 28px));
+  margin: 12px auto 30px;
+  background: rgba(255,255,255,.88);
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 20px 65px #8b659b22;
+}
+.cover {
+  padding: 34px 22px;
+  text-align: center;
+  background: linear-gradient(145deg,#f7d6e8,#e4d5ff 60%,#fff0d9);
+}
+.crown { font-size: 32px; }
+h1 { font-size: clamp(34px,7vw,62px); margin: 8px 0; line-height: 1.05; }
+.script { color: var(--rose); font-style: italic; }
+.subtitle { letter-spacing: 3px; text-transform: uppercase; font-size: 12px; }
+.flowerline { color: #d5a44d; letter-spacing: 8px; font-size: 20px; }
+.content { padding: 26px clamp(20px,5vw,55px) 35px; text-align: center; }
+h2 { font-size: 28px; margin: 10px 0; }
+.details { line-height: 1.9; margin: 20px 0; }
+.pill {
+  display: inline-block;
+  padding: 10px 15px;
+  margin: 5px;
+  border-radius: 22px;
+  background: #fff0f6;
+  font-size: 14px;
+}
+form {
+  max-width: 500px;
+  margin: 24px auto 0;
+  text-align: left;
+  background: #fff8fc;
+  padding: 22px;
+  border: 1px solid #f1d9e9;
+  border-radius: 18px;
+}
+label { display: block; margin: 13px 0 6px; font-size: 14px; font-weight: bold; }
+input, textarea {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid #e4cce6;
+  border-radius: 10px;
+  font: inherit;
+  background: white;
+  color: var(--ink);
+}
+textarea { resize: vertical; min-height: 78px; }
+.buttons { display: flex; gap: 10px; margin-top: 16px; }
+button {
+  flex: 1;
+  border: 0;
+  border-radius: 12px;
+  padding: 14px 8px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 13px;
+}
+button:disabled { opacity: .6; }
+.yes { background: #e1f4e8; color: #28754b; }
+.no { background: #ffe8ec; color: #a83756; }
+#message { text-align: center; margin-top: 15px; font-size: 14px; }
+footer { text-align: center; padding: 0 15px 25px; font-size: 13px; }
+.note { font-size: 12px; opacity: .8; }
+@media (min-width: 720px) {
+  .layout { display: grid; grid-template-columns: 0.85fr 1.15fr; }
+  .cover { display: flex; flex-direction: column; justify-content: center; }
+  .content { padding-top: 35px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .butterfly { animation-duration: 30s; }
+}
+</style>
+</head>
+<body>
+<div class="butterfly" aria-hidden="true">🦋</div>
+<div class="butterfly" aria-hidden="true">🦋</div>
+<div class="butterfly" aria-hidden="true">🦋</div>
+<header>✦ THEIA'S BIRTHDAY ✦</header>
+<main>
+  <div class="layout">
+    <section class="cover">
+      <div class="crown">♕ ✨ ♕</div>
+      <p class="subtitle">A little fairy tale begins</p>
+      <h1 class="script">Theia's<br>1st Birthday</h1>
+      <div class="flowerline">✿ ✧ ❀ ✧ ✿</div>
+      <p>One magical year filled with love, laughter, and little wonders.</p>
+      <p>🦋 🌸 🦋</p>
+    </section>
+    <section class="content">
+      <p class="subtitle" style="color:#df669b">You're invited!</p>
+      <h2>Let's celebrate<br>together!</h2>
+      <div class="details">
+        <div class="pill">📅 Saturday, November 14, 2026</div><br>
+        <div class="pill">🕓 4:00 PM – 6:00 PM</div>
+        <p><strong>📍 Jollibee Boulevard DT</strong><br>Osmeña Blvd, Cebu City</p>
+        Kindly let us know if you can come.
+      </div>
+      <form id="rsvpForm">
+        <label for="guestName">Your name</label>
+        <input id="guestName" name="guestName" required maxlength="100" placeholder="Enter your full name">
+        <label for="guestMessage">Message for Theia (optional)</label>
+        <textarea id="guestMessage" name="guestMessage" maxlength="500" placeholder="Leave a sweet birthday message..."></textarea>
+        <div class="buttons">
+          <button class="yes" type="submit" data-answer="yes">♡ YES, I'LL COME</button>
+          <button class="no" type="submit" data-answer="no">SORRY, CAN'T COME</button>
+        </div>
+        <div id="message" role="status" aria-live="polite"></div>
+        <p class="note">Your response will be recorded when RSVP storage is connected.</p>
+      </form>
+    </section>
+  </div>
+</main>
+<footer>Made with love for Theia's special day 🦋</footer>
+<script>
+const form = document.getElementById('rsvpForm');
+const message = document.getElementById('message');
+let answer = 'yes';
+form.querySelectorAll('button[data-answer]').forEach(button => {
+  button.addEventListener('click', () => { answer = button.dataset.answer; });
+});
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  const name = document.getElementById('guestName').value.trim();
+  if (!name) {
+    message.textContent = 'Please enter your name first.';
+    return;
+  }
+  message.textContent = 'Thank you, ' + name + '! Your ' +
+    (answer === 'yes' ? 'YES' : 'NO') +
+    ' response is ready. RSVP storage is not connected yet.';
+});
+</script>
+</body>
+</html>
