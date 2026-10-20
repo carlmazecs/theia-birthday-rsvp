@@ -57,10 +57,37 @@ main {
   box-shadow: 0 20px 65px #8b659b22;
 }
 .cover {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   padding: 34px 22px;
   text-align: center;
-  background: linear-gradient(145deg,#f7d6e8,#e4d5ff 60%,#fff0d9);
+  background: linear-gradient(180deg,#dcecff 0%,#f7e1f1 58%,#ffeaca 100%);
 }
+.cover::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 12% 105%,#b7dda7 0 31%,transparent 31.5%),
+    radial-gradient(ellipse at 88% 110%,#a6d69d 0 37%,transparent 37.5%),
+    radial-gradient(ellipse at 48% 122%,#87c78e 0 46%,transparent 46.5%);
+}
+.cover::after {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 12% 17%,rgba(255,255,255,.9) 0 2px,transparent 3px),
+    radial-gradient(circle at 75% 13%,rgba(255,255,255,.85) 0 2px,transparent 3px),
+    radial-gradient(circle at 89% 38%,rgba(255,255,255,.8) 0 1.5px,transparent 2.5px),
+    radial-gradient(circle at 23% 54%,rgba(255,255,255,.8) 0 1.5px,transparent 2.5px),
+    radial-gradient(ellipse at 50% 0%,rgba(255,255,255,.35),transparent 65%);
+}
+.cover > * { position: relative; z-index: 1; }
 .crown { font-size: 32px; }
 h1 { font-size: clamp(34px,7vw,62px); margin: 8px 0; line-height: 1.05; }
 .script { color: var(--rose); font-style: italic; }
@@ -132,10 +159,10 @@ footer { text-align: center; padding: 0 15px 25px; font-size: 13px; }
   <div class="layout">
     <section class="cover">
       <div class="crown">♕ ✨ ♕</div>
-      <p class="subtitle">A little fairy tale begins</p>
+      <p class="subtitle">Come celebrate a year of smiles</p>
       <h1 class="script">Theia's<br>1st Birthday</h1>
       <div class="flowerline">✿ ✧ ❀ ✧ ✿</div>
-      <p>One magical year filled with love, laughter, and little wonders.</p>
+      <p>A whole year of giggles, cuddles, and love.</p>
       <p>🦋 🌸 🦋</p>
     </section>
     <section class="content">
